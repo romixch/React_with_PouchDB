@@ -9,3 +9,4 @@ ehthumbs.db
 node_modules/
 /dist
 /src/bower_components/
+/src/scripts/app.js
