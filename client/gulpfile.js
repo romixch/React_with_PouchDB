@@ -10,11 +10,19 @@ var gulp = require('gulp'),
     connect = $.connectMulti,
     wiredep = require('wiredep').stream,
     devServer = connect(),
-    proServer = connect();
+    proServer = connect(),
+    modRewrite = require('connect-modrewrite');
 
 gulp.task('connect-dev', devServer.server({
     root: ['src'],
     port: 8989,
+    middleware: function() {
+      return [
+        modRewrite([
+          '^/couchdb/(.*)$ http://localhost:5984/$1 [P]'
+        ])
+      ];
+    },
     livereload: true
 }));
 
